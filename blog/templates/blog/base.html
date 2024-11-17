@@ -1,0 +1,269 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="{% static 'blog/main.css' %}">
+    
+    <style>
+      :root {
+        --maroon: #800020;
+        --dark-maroon: #600018;
+        --light-grey: #f5f5f5;
+        --medium-grey: #666666;
+        --off-white: #faf9f6;
+      }
+      
+      body {
+        background-image: url("{% static 'site_images/archive-background.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: -1;
+      }
+      
+      .navbar {
+        background-color: var(--maroon) !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        padding: 0.8rem 1rem;
+      }
+      
+      .navbar-brand img {
+        transition: transform 0.3s ease;
+        background-color: var(--off-white);
+        padding: 5px;
+        border-radius: 5px;
+      }
+      
+      .navbar-brand:hover img {
+        transform: scale(1.05);
+      }
+      
+      .navbar-brand {
+        font-size: 1.4rem;
+        color: var(--off-white) !important;
+      }
+      
+      .nav-btn {
+        background-color: var(--dark-maroon);
+        border: none;
+        border-radius: 5px;
+        padding: 0.5rem 1rem;
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+      
+      .nav-btn:hover {
+        background-color: var(--maroon);
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      }
+      
+      .search-form {
+        display: flex;
+        align-items: center;
+        margin-right: 1rem;
+      }
+      
+      .search-form input {
+        border: none;
+        border-radius: 20px;
+        padding: 0.5rem 1rem;
+        margin-right: 0.5rem;
+        width: 200px;
+        transition: all 0.3s ease;
+        background-color: var(--off-white);
+      }
+      
+      .search-form input:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px var(--medium-grey);
+        width: 250px;
+      }
+      
+      .search-form button {
+        border: none;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        background-color: var(--dark-maroon);
+        transition: all 0.3s ease;
+      }
+      
+      .search-form button:hover {
+        background-color: var(--maroon);
+        transform: scale(1.05);
+      }
+      
+      .container {
+        background-color: rgba(250, 249, 246, 0.95);
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        padding: 2rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        backdrop-filter: blur(5px);
+      }
+      
+      .alert {
+        border-radius: 8px;
+        margin-bottom: 1rem;
+      }
+      
+      .btn {
+        border-radius: 5px;
+        padding: 0.5rem 1rem;
+        transition: all 0.3s ease;
+      }
+      
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .dropdown-menu {
+        background-color: var(--off-white);
+        border: none;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+
+      .dropdown-item {
+        color: var(--medium-grey);
+        transition: all 0.3s ease;
+      }
+
+      .dropdown-item:hover {
+        background-color: var(--light-grey);
+        color: var(--maroon);
+      }
+
+      .alert-dismissible .close {
+        color: var(--medium-grey);
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--light-grey);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--medium-grey);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--maroon);
+      }
+    </style>
+    
+    {% if title %}
+        <title>Archive - {{title}}</title>
+    {% else %}
+        <title>Archive</title>
+    {% endif %}
+  </head>
+  
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" href="{% url 'blog-home' %}">
+          <img src="{% static 'site_images/puerto_rico_archives.png' %}" width="40" height="40" class="d-inline-block align-top mr-2" alt="Archive Logo">
+          <span class="font-weight-bold">Archive</span>
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="ml-auto d-flex align-items-center">
+            <form id="searchform" action="{% url 'search' %}" method="get" class="search-form">
+              <input type="text" name="q" value="{{ request.GET.q }}" placeholder="Search archives..." aria-label="Search">
+              <button type="submit" class="d-flex align-items-center justify-content-center">
+                <i class="fa fa-search text-white"></i>
+              </button>
+            </form>
+            
+            {% if user.is_authenticated %}
+              <a href="{% url 'user-files' user %}" class="btn nav-btn text-white m-2">
+                <i class="fas fa-user-shield"></i> My Archives
+              </a>
+              <a href="{% url 'file-create' %}" class="btn nav-btn text-white m-2">
+                <i class="fas fa-upload"></i> Upload
+              </a>
+              <div class="dropdown">
+                <button class="btn nav-btn text-white m-2 dropdown-toggle" type="button" id="userDropdown" data-toggle="dropdown">
+                  <i class="fas fa-user"></i> {{ user.username }}
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a class="dropdown-item" href="{% url 'profile' %}">
+                    <i class="fas fa-user-cog"></i> Profile
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <form id="logout-form" action="{% url 'logout' %}" method="POST" style="display: none;" class="dropdown-item p-0">
+                    {% csrf_token %}
+                  </form>
+                  <button onclick="handleLogout()" class="dropdown-item">
+                    <i class="fas fa-sign-out-alt"></i> Log Out
+                  </button>
+                  
+                </div>
+              </div>
+            {% else %}
+              <a href="{% url 'login' %}" class="btn nav-btn text-white m-2">
+                <i class="fas fa-sign-in-alt"></i> Login
+              </a>
+              <a href="{% url 'register' %}" class="btn nav-btn text-white m-2">
+                <i class="fas fa-user-plus"></i> Sign Up
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert">
+              <span>&times;</span>
+            </button>
+          </div>
+        {% endfor %}
+      {% endif %}
+      
+      {% block content %}{% endblock %}
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="{% static 'blog/main.js' %}"></script>
+    <script>function handleLogout() {const form = document.getElementById('logout-form');form.submit();}</script>
+  </body>
+</html>
